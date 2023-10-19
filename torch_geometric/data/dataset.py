@@ -24,7 +24,8 @@ class Dataset(torch.utils.data.Dataset, ABC):
 
     Args:
         root (str, optional): Root directory where the dataset should be saved.
-            (optional: :obj:`None`)
+            In case the path does not contain the dataset name, it will be
+            automatically added to the path (optional: :obj:`None`)
         transform (callable, optional): A function/transform that takes in a
             :class:`~torch_geometric.data.Data` or
             :class:`~torch_geometric.data.HeteroData` object and returns a
@@ -87,6 +88,10 @@ class Dataset(torch.utils.data.Dataset, ABC):
 
         if isinstance(root, str):
             root = osp.expanduser(osp.normpath(root))
+
+        dataset_name = self.__class__.__name__
+        if root is not None and dataset_name not in str(root):
+            root = osp.join(root, dataset_name)
 
         self.root = root
         self.transform = transform
