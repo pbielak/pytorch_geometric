@@ -12,7 +12,7 @@ def test_pickle(tmp_path):
     dataset = OnDiskDataset(tmp_path)
     assert len(dataset) == 0
     assert str(dataset) == 'OnDiskDataset(0)'
-    assert osp.exists(osp.join(tmp_path, 'processed', 'sqlite.db'))
+    assert osp.exists(osp.join(tmp_path, 'OnDiskDataset', 'processed', 'sqlite.db'))
 
     data_list = [
         Data(
@@ -77,7 +77,7 @@ def test_custom_schema(tmp_path):
     dataset = CustomSchemaOnDiskDataset(tmp_path)
     assert len(dataset) == 0
     assert str(dataset) == 'CustomSchemaOnDiskDataset(0)'
-    assert osp.exists(osp.join(tmp_path, 'processed', 'sqlite.db'))
+    assert osp.exists(osp.join(tmp_path, 'CustomSchemaOnDiskDataset', 'processed', 'sqlite.db'))
 
     data_list = [
         Data(
